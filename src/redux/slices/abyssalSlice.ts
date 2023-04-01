@@ -53,7 +53,7 @@ const abyssalSlice = createSlice({
     },
     finishAbyssal: (state) => {
       const durationMs = dayjs(state.roomThree.end).diff(dayjs(state.roomOne.start));
-      const resultData = `$RoomOne\n-${DELIMITER}\n${state.roomOne.data}\n$RoomTwo\n-${DELIMITER}\n${state.roomTwo.data}\n$RoomThree\n-${DELIMITER}\n${state.roomThree.data}\n`;
+      const resultData = `$RoomOne:\n${state.roomOne.data}\n${DELIMITER}\n$RoomTwo:\n${state.roomTwo.data}\n${DELIMITER}\n$RoomThree:\n${state.roomThree.data}\n${DELIMITER}\n`;
 
       const newAbyssal: IAbyssal = { created: state.roomOne.start as string, durationMs, data: resultData };
 

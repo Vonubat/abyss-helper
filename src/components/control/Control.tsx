@@ -48,8 +48,8 @@ const Control = (): JSX.Element => {
   }, [roomOne.start, roomThree.end, pauseStopwatch]);
 
   return (
-    <div className="flex w-[100vw] flex-col items-center rounded-md bg-sky-200 px-2 pb-5 pt-2">
-      <div className="control__wrapper flex w-[100vw] flex-wrap items-center justify-around gap-5 ">
+    <div className="flex w-full flex-col items-center rounded-md bg-sky-200 px-2 pb-5 pt-2">
+      <div className="control__wrapper flex w-full flex-wrap items-center justify-around gap-5 ">
         <div className="btns__wrapper flex  justify-center gap-10 rounded-md p-2">
           <Button
             disabled={isBtnDisabled}
@@ -63,7 +63,7 @@ const Control = (): JSX.Element => {
           hours,
         ).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} `}</span>
       </div>
-      <div className="room__wrapper flex w-[100vw] items-center  p-2">
+      <div className="room__wrapper flex w-full items-center  p-2">
         <Room roomType="One" />
         <Room roomType="Two" />
         <Room roomType="Three" />
