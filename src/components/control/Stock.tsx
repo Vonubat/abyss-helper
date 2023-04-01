@@ -8,7 +8,7 @@ type Props = {
   roomType: RoomsType;
 };
 
-const Room = ({ roomType }: Props): JSX.Element => {
+const Stock = ({ roomType }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const roomKey: `room${RoomsType}` = `room${roomType}`;
   const { [roomKey]: room } = useAppSelector(abyssSelector);
@@ -58,4 +58,4 @@ const Room = ({ roomType }: Props): JSX.Element => {
   );
 };
 
-export default Room;
+export default Stock;

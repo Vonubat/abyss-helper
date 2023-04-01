@@ -4,7 +4,7 @@ import { Button } from 'flowbite-react';
 
 import { abyssSelector, finishAbyss, startAbyss, useAppDispatch, useAppSelector } from '../../redux';
 
-import Room from './Room';
+import Stock from './Stock';
 
 const Control = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -63,10 +63,9 @@ const Control = (): JSX.Element => {
           hours,
         ).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} `}</span>
       </div>
-      <div className="room__wrapper flex w-full items-center  p-2">
-        <Room roomType="One" />
-        <Room roomType="Two" />
-        <Room roomType="Three" />
+      <div className="loot__wrapper flex w-full items-center p-2">
+        <Stock stockType="One" />
+        <Stock stockype="Two" />
       </div>
     </div>
   );

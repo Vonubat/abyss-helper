@@ -1,4 +1,4 @@
-import { AbyssCard, Control } from '../components';
+import { Card, Control } from '../components';
 import { abyssSelector, useAppSelector } from '../redux';
 
 const MainPage = (): JSX.Element => {
@@ -9,7 +9,7 @@ const MainPage = (): JSX.Element => {
       <Control />
       <div className="cards__container flex flex-wrap gap-10">
         {abysses.map((abyss) => (
-          <AbyssCard key={abyss.created} abyss={abyss} />
+          <Card key={abyss.created} abyss={abyss} />
         ))}
       </div>
     </main>

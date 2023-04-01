@@ -1,22 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import dayjs from 'dayjs';
 
-import { DELIMITER, LS_ABYSSES_KEY, NULL_ROOM_STATE } from '../../constants';
-import { IAbyss, IRoom, RoomsType } from '../../types';
+import { LS_ABYSSES_KEY, NULL_ABYSS } from '../../constants';
+import { Abyss, RoomStatus, RoomType, StockData, StockType } from '../../types';
 
 type AbyssState = {
-  [key in `room${RoomsType}`]: IRoom;
-} & {
-  abysses: IAbyss[];
+  abysses: Abyss[];
+  currentAbyss: Abyss;
 };
 
 const abyssesInitial: string | null = localStorage.getItem(LS_ABYSSES_KEY);
 
 const initialState: AbyssState = {
-  abysses: abyssesInitial ? (JSON.parse(abyssesInitial) as IAbyss[]) : [],
-  roomOne: NULL_ROOM_STATE,
-  roomTwo: NULL_ROOM_STATE,
-  roomThree: NULL_ROOM_STATE,
+  abysses: abyssesInitial ? (JSON.parse(abyssesInitial) as Abyss[]) : [],
+  currentAbyss: NULL_ABYSS,
 };
 
 const abyssSlice = createSlice({
@@ -24,45 +20,51 @@ const abyssSlice = createSlice({
   name: 'abyssSlice',
   reducers: {
     startAbyss: (state) => {
-      state.roomOne.start = dayjs().toJSON();
+      state.currentAbyss.created = Date.now().toString();
     },
-    finishRoom: (state, action: PayloadAction<{ roomType: RoomsType; data: string }>) => {
-      const { roomType, data } = action.payload;
+    setRoom: (state, action: PayloadAction<{ type: RoomType; status: RoomStatus }>) => {
+      const { type, status } = action.payload;
 
-      state[`room${roomType}`].data = data;
-
-      switch (roomType) {
+      switch (type) {
         case 'One':
-          state.roomOne.end = dayjs().toJSON();
-          state.roomTwo.start = dayjs().toJSON();
+          state.currentAbyss.roomOne = status;
 
           break;
         case 'Two':
-          state.roomTwo.end = dayjs().toJSON();
-          state.roomThree.start = dayjs().toJSON();
+          state.currentAbyss.roomTwo = status;
 
           break;
         case 'Three':
-          state.roomThree.end = dayjs().toJSON();
+          state.currentAbyss.roomThree = status;
 
           break;
-
         default:
-          throw new Error('Invalid roomType');
+          throw new Error('Invalid RoomType');
       }
     },
-    finishAbyss: (state) => {
-      const durationMs = dayjs(state.roomThree.end).diff(dayjs(state.roomOne.start));
-      const resultData = `$RoomOne:\n${state.roomOne.data}\n${DELIMITER}\n$RoomTwo:\n${state.roomTwo.data}\n${DELIMITER}\n$RoomThree:\n${state.roomThree.data}\n${DELIMITER}\n`;
+    setStock: (state, action: PayloadAction<{ type: StockType; data: StockData }>) => {
+      const { type, data } = action.payload;
 
-      const newAbyss: IAbyss = { created: state.roomOne.start as string, durationMs, data: resultData };
+      switch (type) {
+        case 'Before':
+          state.currentAbyss.stockBefore = data;
 
-      state.abysses.push(newAbyss);
-      localStorage.setItem(LS_ABYSSES_KEY, JSON.stringify(state.abysses));
+          break;
+        case 'After':
+          state.currentAbyss.stockAfter = data;
 
-      state.roomOne = NULL_ROOM_STATE;
-      state.roomTwo = NULL_ROOM_STATE;
-      state.roomThree = NULL_ROOM_STATE;
+          break;
+        default:
+          throw new Error('Invalid StockType');
+      }
+    },
+    finishAbyss: (state, action: PayloadAction<{ duration: string }>) => {
+      const { duration } = action.payload;
+
+      state.currentAbyss.duration = duration;
+      state.abysses.push(state.currentAbyss);
+
+      state.currentAbyss = NULL_ABYSS;
     },
     clearAbysses: (state) => {
       localStorage.removeItem(LS_ABYSSES_KEY);
@@ -73,6 +75,6 @@ const abyssSlice = createSlice({
 
 export default abyssSlice.reducer;
 
-export const { startAbyss, finishRoom, finishAbyss, clearAbysses } = abyssSlice.actions;
+export const { startAbyss, setRoom, setStock, finishAbyss, clearAbysses } = abyssSlice.actions;
 
 export const abyssSelector = (state: { abyssStore: AbyssState }) => state.abyssStore;

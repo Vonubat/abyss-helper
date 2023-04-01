@@ -1,13 +1,14 @@
-export interface IAbyss {
-  created: string;
-  durationMs: number;
-  data: string;
-}
+export type Abyss = {
+  [key in `stock${StockType}`]: StockData;
+} & {
+  [key in `room${RoomType}`]: RoomStatus;
+} & {
+  created: string | null;
+  duration: string | null;
+};
 
-export interface IRoom {
-  start: string | null;
-  end: string | null;
-  data: string | null;
-}
+export type StockData = string | null;
+export type StockType = 'Before' | 'After';
 
-export type RoomsType = 'One' | 'Two' | 'Three';
+export type RoomStatus = 'All' | 'Partially' | null;
+export type RoomType = 'One' | 'Two' | 'Three';
