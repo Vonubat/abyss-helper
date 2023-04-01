@@ -1,12 +1,12 @@
 import { Button } from 'flowbite-react';
 
-import { clearAbyssals, useAppDispatch } from '../../redux';
+import { clearAbysses, useAppDispatch } from '../../redux';
 
 const Header = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const clearHistory = () => {
-    dispatch(clearAbyssals());
+    dispatch(clearAbysses());
   };
 
   return (

@@ -1,4 +1,4 @@
-export const LS_ABYSSALS_KEY = 'abyssals';
+export const LS_ABYSSES_KEY = 'abyss';
 
 export const DELIMITER = '--------------------------';
 

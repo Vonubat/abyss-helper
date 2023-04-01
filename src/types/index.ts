@@ -1,4 +1,4 @@
-export interface IAbyssal {
+export interface IAbyss {
   created: string;
   durationMs: number;
   data: string;

@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Button } from 'flowbite-react';
 
-import { abyssalSelector, finishRoom, useAppDispatch, useAppSelector } from '../../redux';
+import { abyssSelector, finishRoom, useAppDispatch, useAppSelector } from '../../redux';
 import { RoomsType } from '../../types';
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 const Room = ({ roomType }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const roomKey: `room${RoomsType}` = `room${roomType}`;
-  const { [roomKey]: room } = useAppSelector(abyssalSelector);
+  const { [roomKey]: room } = useAppSelector(abyssSelector);
   const [isElemDisabled, setElemDisabled] = useState<boolean>(true);
   const [lootValue, setLootValue] = useState<string>('');
 

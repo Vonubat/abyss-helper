@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { useStopwatch } from 'react-timer-hook';
 import { Button } from 'flowbite-react';
 
-import { abyssalSelector, finishAbyssal, startAbyssal, useAppDispatch, useAppSelector } from '../../redux';
+import { abyssSelector, finishAbyss, startAbyss, useAppDispatch, useAppSelector } from '../../redux';
 
 import Room from './Room';
 
 const Control = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { roomOne, roomThree } = useAppSelector(abyssalSelector);
-  const [btnAction, setBtnAction] = useState<'Start the Abyssal' | 'Save the result'>('Start the Abyssal');
+  const { roomOne, roomThree } = useAppSelector(abyssSelector);
+  const [btnAction, setBtnAction] = useState<'Start the Abyss' | 'Save the result'>('Start the Abyss');
   const [isBtnDisabled, setBtnDisabled] = useState<boolean>(false);
   const {
     seconds,
@@ -20,20 +20,20 @@ const Control = (): JSX.Element => {
     reset: resetStopwatch,
   } = useStopwatch({ autoStart: false });
 
-  const handleStartAbyssal = () => {
-    dispatch(startAbyssal());
+  const handleStartAbyss = () => {
+    dispatch(startAbyss());
     startStopwatch();
   };
 
   const handleSaveResult = () => {
-    dispatch(finishAbyssal());
+    dispatch(finishAbyss());
     resetStopwatch(undefined, false);
   };
 
   useEffect(() => {
     if (!roomOne.start) {
       setBtnDisabled(false);
-      setBtnAction('Start the Abyssal');
+      setBtnAction('Start the Abyss');
     }
 
     if (roomOne.start) {
@@ -53,8 +53,8 @@ const Control = (): JSX.Element => {
         <div className="btns__wrapper flex  justify-center gap-10 rounded-md p-2">
           <Button
             disabled={isBtnDisabled}
-            color={btnAction === 'Start the Abyssal' ? 'success' : 'warning'}
-            onClick={btnAction === 'Start the Abyssal' ? handleStartAbyssal : handleSaveResult}
+            color={btnAction === 'Start the Abyss' ? 'success' : 'warning'}
+            onClick={btnAction === 'Start the Abyss' ? handleStartAbyss : handleSaveResult}
           >
             {btnAction}
           </Button>

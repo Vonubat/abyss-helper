@@ -2,14 +2,14 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import { Card } from 'flowbite-react';
 
-import { IAbyssal } from '../../types';
+import { IAbyss } from '../../types';
 
 dayjs.extend(duration);
 
-type Props = { abyssal: IAbyssal };
+type Props = { abyss: IAbyss };
 
-const AbyssalCard = ({ abyssal }: Props): JSX.Element => {
-  const { created, durationMs, data } = abyssal;
+const AbyssCard = ({ abyss }: Props): JSX.Element => {
+  const { created, durationMs, data } = abyss;
 
   return (
     <div className="max-w-sm">
@@ -24,4 +24,4 @@ const AbyssalCard = ({ abyssal }: Props): JSX.Element => {
   );
 };
 
-export default AbyssalCard;
+export default AbyssCard;

@@ -1,10 +1,10 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import abyssalReducer from './slices/abyssalSlice';
+import abyssReducer from './slices/abyssSlice';
 
 const rootReducer = combineReducers({
-  abyssalStore: abyssalReducer,
+  abyssStore: abyssReducer,
 });
 
 export const store = configureStore({
