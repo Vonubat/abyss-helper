@@ -1,23 +1,55 @@
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Button } from 'flowbite-react';
 
-import { useAppDispatch } from '../../redux';
+import { abyssalSelector, finishRoom, useAppDispatch, useAppSelector } from '../../redux';
+import { RoomsType } from '../../types';
 
 type Props = {
-  type: 'One' | 'Two' | 'Three';
+  roomType: RoomsType;
 };
 
-const Room = ({ type }: Props): JSX.Element => {
+const Room = ({ roomType }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
+  const roomKey: `room${RoomsType}` = `room${roomType}`;
+  const { [roomKey]: room } = useAppSelector(abyssalSelector);
+  const [isElemDisabled, setElemDisabled] = useState<boolean>(true);
+  const [lootValue, setLootValue] = useState<string>('');
+
+  const handleFinishRoom = () => {
+    dispatch(finishRoom({ roomType, data: lootValue }));
+  };
+
+  const handleLootValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setLootValue(e.target.value);
+  };
+
+  useEffect(() => {
+    if (room.start) {
+      setElemDisabled(false);
+    }
+
+    if (room.end) {
+      setElemDisabled(true);
+    }
+  }, [room.end, room.start]);
 
   return (
     <div className="room__wrapper flex h-[450px] grow flex-col items-center border bg-white p-2">
       <div className="heading__wrapper text-center font-semibold text-black">
-        <h3>{`Room ${type}`}</h3>
+        <h3>{`Room ${roomType}`}</h3>
       </div>
       <div className="data__wrapper w-full grow p-3 text-center text-sm text-black text-opacity-50">
-        <textarea className="h-full w-full resize-none" />
+        <textarea
+          className={`h-full w-full resize-none ${isElemDisabled && 'opacity-50'}`}
+          placeholder="Type your loot here..."
+          value={lootValue}
+          onChange={handleLootValue}
+          disabled={isElemDisabled}
+        />
       </div>
-      <Button type="button">Finish the room</Button>
+      <Button disabled={isElemDisabled} type="button" onClick={handleFinishRoom}>
+        Finish the room
+      </Button>
     </div>
   );
 };

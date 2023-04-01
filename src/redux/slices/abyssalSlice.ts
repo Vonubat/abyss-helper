@@ -2,13 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
 
 import { NULL_ROOM_STATE } from '../../constants';
-import { IAbyssal, IRoom } from '../../types';
+import { IAbyssal, IRoom, RoomsType } from '../../types';
 
 type AbyssalState = {
+  [key in `room${RoomsType}`]: IRoom;
+} & {
   abyssals: IAbyssal[];
-  roomOne: IRoom;
-  roomTwo: IRoom;
-  roomThree: IRoom;
 };
 
 const initialState: AbyssalState = {
@@ -25,23 +24,32 @@ const abyssalSlice = createSlice({
     startAbyssal: (state) => {
       state.roomOne.start = dayjs().toJSON();
     },
-    finishRoomOne: (state, action: PayloadAction<string>) => {
-      state.roomOne.data = action.payload;
+    finishRoom: (state, action: PayloadAction<{ roomType: RoomsType; data: string }>) => {
+      const { roomType, data } = action.payload;
 
-      state.roomOne.end = dayjs().toJSON();
-      state.roomTwo.start = dayjs().toJSON();
-    },
-    finishRoomTwo: (state, action: PayloadAction<string>) => {
-      state.roomTwo.data = action.payload;
+      state[`room${roomType}`].data = data;
 
-      state.roomTwo.end = dayjs().toJSON();
-      state.roomThree.start = dayjs().toJSON();
-    },
-    finishRoomThree: (state, action: PayloadAction<string>) => {
-      state.roomTwo.data = action.payload;
+      switch (roomType) {
+        case 'One':
+          state.roomOne.end = dayjs().toJSON();
+          state.roomTwo.start = dayjs().toJSON();
 
-      state.roomThree.end = dayjs().toJSON();
+          break;
+        case 'Two':
+          state.roomTwo.end = dayjs().toJSON();
+          state.roomThree.start = dayjs().toJSON();
+
+          break;
+        case 'Three':
+          state.roomThree.end = dayjs().toJSON();
+
+          break;
+
+        default:
+          throw new Error('Invalid roomType');
+      }
     },
+
     finishAbyssal: (_state) => {
       // TODO
     },
@@ -50,6 +58,6 @@ const abyssalSlice = createSlice({
 
 export default abyssalSlice.reducer;
 
-export const { startAbyssal, finishRoomOne, finishRoomTwo, finishRoomThree, finishAbyssal } = abyssalSlice.actions;
+export const { startAbyssal, finishRoom, finishAbyssal } = abyssalSlice.actions;
 
 export const abyssalSelector = (state: { abyssalStore: AbyssalState }) => state.abyssalStore;

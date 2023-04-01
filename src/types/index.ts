@@ -8,3 +8,5 @@ export interface IRoom {
   end: string | null;
   data: string | null;
 }
+
+export type RoomsType = 'One' | 'Two' | 'Three';
