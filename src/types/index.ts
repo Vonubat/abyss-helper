@@ -1,5 +1,6 @@
 export interface IAbyssal {
   created: string;
+  durationMs: number;
   data: string;
 }
 

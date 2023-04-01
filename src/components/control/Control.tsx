@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useStopwatch } from 'react-timer-hook';
 import { Button } from 'flowbite-react';
 
-import { abyssalSelector, startAbyssal, useAppDispatch, useAppSelector } from '../../redux';
+import { abyssalSelector, finishAbyssal, startAbyssal, useAppDispatch, useAppSelector } from '../../redux';
 
 import Room from './Room';
 
@@ -10,16 +11,31 @@ const Control = (): JSX.Element => {
   const { roomOne, roomThree } = useAppSelector(abyssalSelector);
   const [btnAction, setBtnAction] = useState<'Start the Abyssal' | 'Save the result'>('Start the Abyssal');
   const [isBtnDisabled, setBtnDisabled] = useState<boolean>(false);
+  const {
+    seconds,
+    minutes,
+    hours,
+    start: startStopwatch,
+    pause: pauseStopwatch,
+    reset: resetStopwatch,
+  } = useStopwatch({ autoStart: false });
 
   const handleStartAbyssal = () => {
     dispatch(startAbyssal());
+    startStopwatch();
   };
 
   const handleSaveResult = () => {
-    console.log('Save');
+    dispatch(finishAbyssal());
+    resetStopwatch(undefined, false);
   };
 
   useEffect(() => {
+    if (!roomOne.start) {
+      setBtnDisabled(false);
+      setBtnAction('Start the Abyssal');
+    }
+
     if (roomOne.start) {
       setBtnDisabled(true);
     }
@@ -27,8 +43,9 @@ const Control = (): JSX.Element => {
     if (roomThree.end) {
       setBtnDisabled(false);
       setBtnAction('Save the result');
+      pauseStopwatch();
     }
-  }, [roomOne.start, roomThree.end]);
+  }, [roomOne.start, roomThree.end, pauseStopwatch]);
 
   return (
     <div className="flex w-[100vw] flex-col items-center rounded-md bg-sky-200 px-2 pb-5 pt-2">
@@ -42,7 +59,9 @@ const Control = (): JSX.Element => {
             {btnAction}
           </Button>
         </div>
-        <span className="timer__wrapper flex justify-center gap-10 p-2 text-xl font-bold">Timer: </span>
+        <span className="timer__wrapper flex justify-center gap-10 p-2 text-xl font-bold">{`Total time: ${String(
+          hours,
+        ).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} `}</span>
       </div>
       <div className="room__wrapper flex w-[100vw] items-center  p-2">
         <Room roomType="One" />

@@ -15,15 +15,19 @@ const Room = ({ roomType }: Props): JSX.Element => {
   const [isElemDisabled, setElemDisabled] = useState<boolean>(true);
   const [lootValue, setLootValue] = useState<string>('');
 
-  const handleFinishRoom = () => {
-    dispatch(finishRoom({ roomType, data: lootValue }));
-  };
-
   const handleLootValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setLootValue(e.target.value);
   };
 
+  const handleFinishRoom = () => {
+    dispatch(finishRoom({ roomType, data: lootValue }));
+  };
+
   useEffect(() => {
+    if (!room.start) {
+      setLootValue('');
+    }
+
     if (room.start) {
       setElemDisabled(false);
     }
