@@ -5,16 +5,11 @@ import { Button } from 'flowbite-react';
 import { finishAbyss, saveAbyss, startAbyss, useAppDispatch } from '../../redux';
 import { humanizeTime } from '../../utils';
 
+import Room from './Room';
 import Stock from './Stock';
 
 const Control = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const [btnAction, setBtnAction] = useState<'START' | 'FINISH' | 'SAVE'>('START');
-  const btnStyle = {
-    START: 'success',
-    FINISH: 'failure',
-    SAVE: 'warning',
-  };
   const {
     hours,
     minutes,
@@ -23,6 +18,7 @@ const Control = (): JSX.Element => {
     pause: pauseStopwatch,
     reset: resetStopwatch,
   } = useStopwatch({ autoStart: false });
+  const [btnAction, setBtnAction] = useState<'START' | 'FINISH' | 'SAVE'>('START');
 
   const handleStartAbyss = () => {
     dispatch(startAbyss());
@@ -48,6 +44,12 @@ const Control = (): JSX.Element => {
     SAVE: handleSaveAbyss,
   };
 
+  const btnStyle = {
+    START: 'success',
+    FINISH: 'failure',
+    SAVE: 'warning',
+  };
+
   return (
     <div className="flex w-full flex-col items-center rounded-md bg-sky-200 px-2 pb-5 pt-2">
       <div className="control__wrapper flex w-full flex-wrap items-center justify-around gap-5 ">
@@ -62,9 +64,14 @@ const Control = (): JSX.Element => {
           seconds,
         )}`}</span>
       </div>
-      <div className="loot__wrapper flex w-full items-center p-2">
+      <div className="stock__wrapper flex w-full items-center p-2">
         <Stock type="Before" />
         <Stock type="After" />
+      </div>
+      <div className="room__wrapper flex w-full flex-wrap items-center p-2">
+        <Room type="One" />
+        <Room type="Two" />
+        <Room type="Three" />
       </div>
     </div>
   );
