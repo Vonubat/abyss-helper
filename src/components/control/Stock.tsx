@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import { useDebounce } from '../../hooks';
-import { setStock, useAppDispatch } from '../../redux';
+import { abyssSelector, setStock, useAppDispatch, useAppSelector } from '../../redux';
 import { StockType } from '../../types';
 
 type Props = {
@@ -10,6 +10,7 @@ type Props = {
 
 const Stock = ({ type }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
+  const { created } = useAppSelector(abyssSelector).currentAbyss;
   const [stockValue, setStockValue] = useState<string>('');
   const debouncedStockValue = useDebounce<string>(stockValue);
 
@@ -20,6 +21,12 @@ const Stock = ({ type }: Props): JSX.Element => {
   useEffect(() => {
     dispatch(setStock({ type, data: debouncedStockValue }));
   }, [dispatch, debouncedStockValue, type]);
+
+  useEffect(() => {
+    if (!created) {
+      setStockValue('');
+    }
+  }, [created]);
 
   return (
     <div className="flex h-[450px] grow flex-col items-center border bg-white p-2">

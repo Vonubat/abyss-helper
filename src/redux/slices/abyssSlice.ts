@@ -1,6 +1,7 @@
+import { toast } from 'react-toastify';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { LS_ABYSSES_KEY, NULLABLE_ABYSS } from '../../constants';
+import { LS_ABYSSES_KEY, NULLABLE_ABYSS, ValidationMsg } from '../../constants';
 import { Abyss, RoomStatus, RoomType, StockData, StockType } from '../../types';
 
 type AbyssState = {
@@ -64,9 +65,38 @@ const abyssSlice = createSlice({
       state.currentAbyss.duration = duration;
     },
     saveAbyss: (state) => {
-      state.abysses.push(state.currentAbyss);
+      const { stockBefore, stockAfter, roomOne, roomTwo, roomThree } = state.currentAbyss;
+
+      if (!stockBefore || !stockAfter || !roomOne || !roomTwo || !roomThree) {
+        if (!stockBefore) {
+          toast.error(ValidationMsg.stockBefore);
+        }
+
+        if (!stockAfter) {
+          toast.error(ValidationMsg.stockAfter);
+        }
+
+        if (!roomOne) {
+          toast.error(ValidationMsg.roomOne);
+        }
+
+        if (!roomTwo) {
+          toast.error(ValidationMsg.roomTwo);
+        }
+
+        if (!roomThree) {
+          toast.error(ValidationMsg.roomThree);
+        }
+
+        return undefined;
+      }
+
+      // state.abysses.push(state.currentAbyss);
 
       state.currentAbyss = NULLABLE_ABYSS;
+      toast.success(ValidationMsg.success);
+
+      return state;
     },
     clearAbysses: (state) => {
       localStorage.removeItem(LS_ABYSSES_KEY);

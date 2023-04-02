@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useStopwatch } from 'react-timer-hook';
 import { Button } from 'flowbite-react';
 
-import { finishAbyss, saveAbyss, startAbyss, useAppDispatch } from '../../redux';
+import { abyssSelector, finishAbyss, saveAbyss, startAbyss, useAppDispatch, useAppSelector } from '../../redux';
 import { humanizeTime } from '../../utils';
 
 import Room from './Room';
@@ -10,6 +10,7 @@ import Stock from './Stock';
 
 const Control = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const { created } = useAppSelector(abyssSelector).currentAbyss;
   const {
     hours,
     minutes,
@@ -34,9 +35,15 @@ const Control = (): JSX.Element => {
 
   const handleSaveAbyss = () => {
     dispatch(saveAbyss());
-    setBtnAction('START');
-    resetStopwatch(undefined, false);
   };
+
+  useEffect(() => {
+    if (!created) {
+      setBtnAction('START');
+      resetStopwatch(undefined, false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [created]);
 
   const btnHandler = {
     START: handleStartAbyss,
