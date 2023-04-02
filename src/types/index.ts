@@ -3,7 +3,7 @@ export type Abyss = {
 } & {
   [key in `room${RoomType}`]: RoomStatus;
 } & {
-  created: string | null;
+  created: number | null;
   duration: string | null;
 };
 

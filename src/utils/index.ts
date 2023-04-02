@@ -1,1 +1,1 @@
-export { humanizeTime } from './timeHelpers';
+export { getCreationTime, humanizeTime } from './timeHelpers';

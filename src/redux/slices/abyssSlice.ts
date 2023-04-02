@@ -21,7 +21,7 @@ const abyssSlice = createSlice({
   name: 'abyssSlice',
   reducers: {
     startAbyss: (state) => {
-      state.currentAbyss.created = Date.now().toString();
+      state.currentAbyss.created = Date.now();
     },
     setRoom: (state, action: PayloadAction<{ type: RoomType; status: RoomStatus }>) => {
       const { type, status } = action.payload;
@@ -91,8 +91,8 @@ const abyssSlice = createSlice({
         return undefined;
       }
 
-      // state.abysses.push(state.currentAbyss);
-
+      state.abysses.push(state.currentAbyss);
+      localStorage.setItem(LS_ABYSSES_KEY, JSON.stringify(state.abysses));
       state.currentAbyss = NULLABLE_ABYSS;
       toast.success(ValidationMsg.success);
 

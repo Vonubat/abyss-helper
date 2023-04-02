@@ -7,7 +7,7 @@ const MainPage = (): JSX.Element => {
   return (
     <main className="main-page__wrapper flex grow flex-col items-center gap-20 py-10">
       <Control />
-      <div className="cards__container flex flex-wrap gap-10">
+      <div className="cards__container flex flex-col gap-10">
         {abysses.map((abyss) => (
           <Card key={abyss.created} abyss={abyss} />
         ))}
