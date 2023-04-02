@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { LS_ABYSSES_KEY, NULL_ABYSS } from '../../constants';
+import { LS_ABYSSES_KEY, NULLABLE_ABYSS } from '../../constants';
 import { Abyss, RoomStatus, RoomType, StockData, StockType } from '../../types';
 
 type AbyssState = {
@@ -12,7 +12,7 @@ const abyssesInitial: string | null = localStorage.getItem(LS_ABYSSES_KEY);
 
 const initialState: AbyssState = {
   abysses: abyssesInitial ? (JSON.parse(abyssesInitial) as Abyss[]) : [],
-  currentAbyss: NULL_ABYSS,
+  currentAbyss: NULLABLE_ABYSS,
 };
 
 const abyssSlice = createSlice({
@@ -62,9 +62,11 @@ const abyssSlice = createSlice({
       const { duration } = action.payload;
 
       state.currentAbyss.duration = duration;
+    },
+    saveAbyss: (state) => {
       state.abysses.push(state.currentAbyss);
 
-      state.currentAbyss = NULL_ABYSS;
+      state.currentAbyss = NULLABLE_ABYSS;
     },
     clearAbysses: (state) => {
       localStorage.removeItem(LS_ABYSSES_KEY);
@@ -75,6 +77,6 @@ const abyssSlice = createSlice({
 
 export default abyssSlice.reducer;
 
-export const { startAbyss, setRoom, setStock, finishAbyss, clearAbysses } = abyssSlice.actions;
+export const { startAbyss, setRoom, setStock, finishAbyss, saveAbyss, clearAbysses } = abyssSlice.actions;
 
 export const abyssSelector = (state: { abyssStore: AbyssState }) => state.abyssStore;

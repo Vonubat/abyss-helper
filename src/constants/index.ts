@@ -2,7 +2,7 @@ export const LS_ABYSSES_KEY = 'abyss';
 
 export const DELIMITER = '--------------------------';
 
-export const NULL_ABYSS = {
+export const NULLABLE_ABYSS = {
   created: null,
   duration: null,
   roomOne: null,
