@@ -8,6 +8,7 @@ import { store } from './redux';
 
 import './index.scss';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-awesome-button/dist/styles.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

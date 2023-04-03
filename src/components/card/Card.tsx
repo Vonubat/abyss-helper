@@ -1,5 +1,3 @@
-import { Card as CardFlowbite } from 'flowbite-react';
-
 import { Abyss } from '../../types';
 import { getCreationTime } from '../../utils';
 
@@ -10,7 +8,7 @@ const Card = ({ abyss }: Props): JSX.Element => {
 
   return (
     <div className="w-full">
-      <CardFlowbite className="bg-green-200">
+      <div className="bg-green-200">
         <h2 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           Created: {getCreationTime(created!)}
         </h2>
@@ -26,7 +24,7 @@ const Card = ({ abyss }: Props): JSX.Element => {
           <div className="flex grow flex-col items-center whitespace-pre-wrap border bg-white p-2">{stockBefore}</div>
           <div className="flex  grow flex-col items-center whitespace-pre-wrap border bg-white p-2">{stockAfter}</div>
         </div>
-      </CardFlowbite>
+      </div>
     </div>
   );
 };

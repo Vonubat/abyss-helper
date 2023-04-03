@@ -1,5 +1,6 @@
-import { Button } from 'flowbite-react';
+import { AwesomeButton } from 'react-awesome-button';
 
+import { ReactComponent as TrashIcon } from '../../assets/icons/trash.svg';
 import { clearAbysses, useAppDispatch } from '../../redux';
 
 const Header = (): JSX.Element => {
@@ -10,11 +11,11 @@ const Header = (): JSX.Element => {
   };
 
   return (
-    <header className="flex h-16 w-full items-center justify-around bg-slate-100">
-      <span>Abyss Helper</span>
-      <Button color="failure" onClick={clearHistory}>
+    <header className="flex h-16 w-full items-center justify-between bg-neutral-900 px-3">
+      <h1 className="text-xl font-extrabold text-white sm:text-3xl md:text-5xl">EVE ABYSS HELPER</h1>
+      <AwesomeButton type="danger" before={<TrashIcon />} onPress={clearHistory} className="uppercase">
         Clear history
-      </Button>
+      </AwesomeButton>
     </header>
   );
 };

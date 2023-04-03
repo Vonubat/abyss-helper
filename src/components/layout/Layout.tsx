@@ -10,7 +10,7 @@ export const Layout = (): JSX.Element => {
       <Outlet />
       <ToastContainer
         position="bottom-right"
-        autoClose={3000}
+        autoClose={1000}
         newestOnTop
         closeOnClick
         rtl={false}

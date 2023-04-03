@@ -1,8 +1,7 @@
-import { MouseEvent } from 'react';
-import { Button } from 'flowbite-react';
+import { AwesomeButton } from 'react-awesome-button';
 
 import { abyssSelector, setRoom, useAppDispatch, useAppSelector } from '../../redux';
-import { RoomStatus, RoomType } from '../../types';
+import { RoomType } from '../../types';
 
 type Props = {
   type: RoomType;
@@ -13,22 +12,24 @@ const Room = ({ type }: Props): JSX.Element => {
   const roomKey: `room${RoomType}` = `room${type}`;
   const { [roomKey]: room } = useAppSelector(abyssSelector).currentAbyss;
 
-  const handleRoomStatus = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-    dispatch(setRoom({ type, status: e.currentTarget.value as RoomStatus }));
-  };
-
   return (
-    <div className="flex grow flex-col items-center border bg-white p-2">
+    <div className="flex grow flex-col items-center rounded-md bg-black bg-opacity-50 p-2">
       <div className="heading__wrapper text-center font-semibold text-black">
-        <h3>{`Room ${type}`}</h3>
+        <h3 className="uppercase text-white">{`Room ${type}`}</h3>
       </div>
-      <div className="data__wrapper flex w-full grow justify-center gap-5 p-3 text-center text-sm text-black text-opacity-50">
-        <Button outline={room !== 'All'} value="All" onClick={handleRoomStatus}>
+      <div className="data__wrapper flex w-[200px] grow justify-center gap-5 p-3 text-center text-sm text-black text-opacity-50">
+        <AwesomeButton
+          type={room === 'All' ? 'primary' : 'secondary'}
+          onPress={() => dispatch(setRoom({ type, status: 'All' }))}
+        >
           All
-        </Button>
-        <Button outline={room !== 'Partially'} value="Partially" onClick={handleRoomStatus}>
+        </AwesomeButton>
+        <AwesomeButton
+          type={room === 'Partially' ? 'primary' : 'secondary'}
+          onPress={() => dispatch(setRoom({ type, status: 'Partially' }))}
+        >
           Partially
-        </Button>
+        </AwesomeButton>
       </div>
     </div>
   );

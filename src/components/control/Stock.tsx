@@ -29,13 +29,13 @@ const Stock = ({ type }: Props): JSX.Element => {
   }, [created]);
 
   return (
-    <div className="flex h-[450px] grow flex-col items-center border bg-white p-2">
+    <div className="flex h-[450px] grow flex-col items-center rounded-md bg-black bg-opacity-50 p-2">
       <div className="heading__wrapper text-center font-semibold text-black">
-        <h3>{`Stock ${type}`}</h3>
+        <h3 className="uppercase text-white">{`Stock ${type}`}</h3>
       </div>
       <div className="data__wrapper w-full grow p-3 text-center text-sm text-black text-opacity-50">
         <textarea
-          className="h-full w-full resize-none"
+          className="h-full w-full resize-none p-3"
           placeholder="Type your stock here..."
           value={stockValue}
           onChange={handleStockValue}

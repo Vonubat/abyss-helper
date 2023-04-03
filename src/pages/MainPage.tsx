@@ -5,7 +5,7 @@ const MainPage = (): JSX.Element => {
   const { abysses } = useAppSelector(abyssSelector);
 
   return (
-    <main className="main-page__wrapper flex grow flex-col items-center gap-20 py-10">
+    <main className="main-page__wrapper flex grow flex-col items-center gap-20 bg-[url('./assets/bg.webp')] bg-cover py-10">
       <Control />
       <div className="cards__container flex flex-col gap-10">
         {abysses.map((abyss) => (
