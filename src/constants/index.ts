@@ -17,11 +17,11 @@ export enum Path {
 }
 
 export enum ValidationMsg {
-  stockBefore = 'You forgot type your Stock Before',
-  stockAfter = 'You forgot type your Stock After',
-  roomOne = 'You forgot select loot amount in the Room One',
-  roomTwo = `You forgot select loot amount in the Room Two`,
-  roomThree = `You forgot select loot amount in the Room Three`,
+  stockBefore = 'You forgot to type your Stock Before',
+  stockAfter = 'You forgot to type your Stock After',
+  roomOne = 'You forgot to select loot amount in the Room One',
+  roomTwo = `You forgot to select loot amount in the Room Two`,
+  roomThree = `You forgot to select loot amount in the Room Three`,
 }
 
 export enum SysMsg {

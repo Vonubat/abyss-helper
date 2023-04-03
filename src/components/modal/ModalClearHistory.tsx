@@ -21,7 +21,7 @@ const ModalClearHistory = (): JSX.Element => {
   return (
     <Modal
       className={`modal fixed left-1/2 top-1/2 z-50 flex
-      max-h-[500px] max-w-[500px] -translate-x-1/2 -translate-y-1/2 flex-col rounded-md bg-white p-7 shadow-md outline-none`}
+      max-h-[500px] max-w-[550px] -translate-x-1/2 -translate-y-1/2 flex-col rounded-md bg-white p-7 shadow-md outline-none`}
       show={modalClearHistory}
       onHide={handleClose}
       renderBackdrop={Backdrop}
@@ -33,7 +33,7 @@ const ModalClearHistory = (): JSX.Element => {
           </div>
         </div>
         <div className="modal__desc mt-5 flex max-h-[250px] w-full overflow-auto">
-          <span className="break-all text-2xl text-black">Are you sure want to clear history?</span>
+          <span className="text-2xl text-black">Are you sure you want to clear history?</span>
         </div>
         <div className="modal__footer mt-5 flex w-full justify-center gap-3">
           <AwesomeButton type="danger" onPress={clearHistory} className="uppercase">
