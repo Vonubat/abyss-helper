@@ -1,3 +1,4 @@
+export const HOMEPAGE = 'https://github.com/Vonubat/abyss-helper';
 export const LS_ABYSSES_KEY = 'abyss';
 
 export const NULLABLE_ABYSS = {
