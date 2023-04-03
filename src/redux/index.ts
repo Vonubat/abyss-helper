@@ -7,4 +7,5 @@ export {
   setStock,
   startAbyss,
 } from './slices/abyssSlice';
+export { modalSelector, setModalClearHistory } from './slices/modalSlice';
 export { store, useAppDispatch, useAppSelector } from './store';

@@ -20,12 +20,14 @@ const Room = ({ type }: Props): JSX.Element => {
       <div className="data__wrapper flex w-[200px] grow justify-center gap-5 p-3 text-center text-sm text-black text-opacity-50">
         <AwesomeButton
           type={room === 'All' ? 'primary' : 'secondary'}
+          className="uppercase"
           onPress={() => dispatch(setRoom({ type, status: 'All' }))}
         >
           All
         </AwesomeButton>
         <AwesomeButton
           type={room === 'Partially' ? 'primary' : 'secondary'}
+          className="uppercase"
           onPress={() => dispatch(setRoom({ type, status: 'Partially' }))}
         >
           Partially

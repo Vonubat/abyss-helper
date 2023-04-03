@@ -1,6 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
+import ModalClearHistory from '../modal/ModalClearHistory';
+
 import Header from './Header';
 
 export const Layout = (): JSX.Element => {
@@ -8,6 +10,7 @@ export const Layout = (): JSX.Element => {
     <>
       <Header />
       <Outlet />
+      <ModalClearHistory />
       <ToastContainer
         position="bottom-right"
         autoClose={1000}
