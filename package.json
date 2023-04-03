@@ -1,7 +1,7 @@
 {
   "name": "abyss-helper",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "authors": [
     "Tabunov Egor <vonubat@gmail.com>",
     "Ivan Zyranau <ewancoder@gmail.com>"
