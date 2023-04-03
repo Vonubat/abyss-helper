@@ -14,7 +14,7 @@ const Stock = ({ type }: Props): JSX.Element => {
   const [stockValue, setStockValue] = useState<string>('');
   const debouncedStockValue = useDebounce<string>(stockValue);
 
-  const handleStockValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleStockValue = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     setStockValue(e.target.value);
   };
 

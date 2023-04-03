@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { LS_ABYSSES_KEY, NULLABLE_ABYSS, ValidationMsg } from '../../constants';
+import { LS_ABYSSES_KEY, NULLABLE_ABYSS, SysMsg, ValidationMsg } from '../../constants';
 import { Abyss, RoomStatus, RoomType, StockData, StockType } from '../../types';
 
 type AbyssState = {
@@ -94,7 +94,7 @@ const abyssSlice = createSlice({
       state.abysses.push(state.currentAbyss);
       localStorage.setItem(LS_ABYSSES_KEY, JSON.stringify(state.abysses));
       state.currentAbyss = NULLABLE_ABYSS;
-      toast.success(ValidationMsg.success);
+      toast.success(SysMsg.success);
 
       return state;
     },

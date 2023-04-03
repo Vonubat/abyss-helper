@@ -21,5 +21,10 @@ export enum ValidationMsg {
   roomOne = 'You forgot select loot amount in the Room One',
   roomTwo = `You forgot select loot amount in the Room Two`,
   roomThree = `You forgot select loot amount in the Room Three`,
+}
+
+export enum SysMsg {
+  stockBefore = 'Stock Before is copied to clipboard',
+  stockAfter = 'Stock After is copied to clipboard',
   success = 'Abyss is saved',
 }

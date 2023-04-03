@@ -13,7 +13,7 @@ const ModalClearHistory = (): JSX.Element => {
     dispatch(setModalClearHistory(false));
   };
 
-  const clearHistory = () => {
+  const clearHistory = (): void => {
     dispatch(clearAbysses());
     dispatch(setModalClearHistory(false));
   };

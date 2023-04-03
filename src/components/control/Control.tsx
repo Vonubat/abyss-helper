@@ -21,19 +21,19 @@ const Control = (): JSX.Element => {
   } = useStopwatch({ autoStart: false });
   const [btnAction, setBtnAction] = useState<'START' | 'FINISH' | 'SAVE'>('START');
 
-  const handleStartAbyss = () => {
+  const handleStartAbyss = (): void => {
     dispatch(startAbyss());
     setBtnAction('FINISH');
     startStopwatch();
   };
 
-  const handleFinishAbyss = () => {
+  const handleFinishAbyss = (): void => {
     dispatch(finishAbyss({ duration: humanizeTime(hours, minutes, seconds) }));
     setBtnAction('SAVE');
     pauseStopwatch();
   };
 
-  const handleSaveAbyss = () => {
+  const handleSaveAbyss = (): void => {
     dispatch(saveAbyss());
   };
 

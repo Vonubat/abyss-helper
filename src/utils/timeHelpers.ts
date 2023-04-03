@@ -4,5 +4,5 @@ export const humanizeTime = (hours: number, minutes: number, seconds: number): s
 export const getCreationTime = (created: number): string => {
   const date = new Date(created);
 
-  return `${date.toString()}`;
+  return `${date.toLocaleDateString('en-GB')} ${date.toLocaleTimeString('en-GB')}`;
 };

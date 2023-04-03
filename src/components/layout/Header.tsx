@@ -6,7 +6,7 @@ import { setModalClearHistory, useAppDispatch } from '../../redux';
 const Header = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
-  const openModal = () => {
+  const openModal = (): void => {
     dispatch(setModalClearHistory(true));
   };
 
