@@ -39,14 +39,12 @@ const Card = ({ abyss }: Props): JSX.Element => {
 
   return (
     <div className="max-h-[350px] max-w-lg rounded-md bg-black bg-opacity-50 p-2">
-      <h2 className="whitespace-nowrap text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+      <h2 className="whitespace-nowrap text-2xl font-bold tracking-tight text-white">
         Created: {getCreationTime(created!)}
       </h2>
-      <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">Duration: {duration}</h5>
+      <h5 className="text-xl font-bold tracking-tight text-white">Duration: {duration}</h5>
       <div className="flex flex-col gap-3">
-        <h5 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-          Rooms Status: {handleRoomStatus()}
-        </h5>
+        <h5 className="text-xl font-bold tracking-tight text-white">Rooms Status: {handleRoomStatus()}</h5>
       </div>
       <div className="stock__wrapper flex justify-center gap-3 p-2">
         <AwesomeButton before={<CopyIcon />} className="uppercase" onPress={handleCopyStockBefore}>
