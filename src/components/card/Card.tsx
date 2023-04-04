@@ -38,7 +38,7 @@ const Card = ({ abyss }: Props): JSX.Element => {
   };
 
   return (
-    <div className="max-h-[350px] max-w-lg rounded-md bg-black bg-opacity-50 p-2">
+    <div className="min-w-[350px] rounded-md bg-black bg-opacity-50 p-2">
       <h2 className="whitespace-nowrap text-2xl font-bold tracking-tight text-white">
         Created: {getCreationTime(created!)}
       </h2>
