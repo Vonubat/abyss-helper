@@ -1,5 +1,8 @@
 export const HOMEPAGE = 'https://github.com/Vonubat/abyss-helper';
 export const LS_ABYSSES_KEY = 'abyss';
+export const ROOM_ONE_DEADLINE = '05';
+export const ROOM_TWO_DEADLINE = '10';
+export const ROOM_THREE_DEADLINE = '15';
 
 export const NULLABLE_ABYSS = {
   created: null,
