@@ -28,4 +28,5 @@ export enum SysMsg {
   stockBefore = 'Stock Before is copied to clipboard',
   stockAfter = 'Stock After is copied to clipboard',
   success = 'Abyss is saved',
+  dontForgetStart = 'DON`T FORGET START ABYSS!!!',
 }

@@ -13,6 +13,7 @@ const Stock = ({ type }: Props): JSX.Element => {
   const { created } = useAppSelector(abyssSelector).currentAbyss;
   const [stockValue, setStockValue] = useState<string>('');
   const debouncedStockValue = useDebounce<string>(stockValue);
+  const [isStockAfterDisabled, setStockAfterDisabling] = useState<boolean>(true);
 
   const handleStockValue = (e: ChangeEvent<HTMLTextAreaElement>): void => {
     setStockValue(e.target.value);
@@ -28,6 +29,16 @@ const Stock = ({ type }: Props): JSX.Element => {
     }
   }, [created]);
 
+  useEffect(() => {
+    if (created) {
+      setStockAfterDisabling(false);
+    }
+
+    if (!created) {
+      setStockAfterDisabling(true);
+    }
+  }, [created]);
+
   return (
     <div className="flex h-[450px] grow flex-col items-center rounded-md bg-black bg-opacity-50 p-2">
       <div className="heading__wrapper text-center font-semibold text-black">
@@ -39,6 +50,7 @@ const Stock = ({ type }: Props): JSX.Element => {
           placeholder="Type your stock here..."
           value={stockValue}
           onChange={handleStockValue}
+          disabled={type === 'After' && isStockAfterDisabled}
         />
       </div>
     </div>

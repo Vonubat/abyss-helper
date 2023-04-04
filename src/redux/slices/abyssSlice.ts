@@ -50,6 +50,10 @@ const abyssSlice = createSlice({
         case 'Before':
           state.currentAbyss.stockBefore = data;
 
+          if (!state.currentAbyss.created && state.currentAbyss.stockBefore) {
+            toast.info(SysMsg.dontForgetStart);
+          }
+
           break;
         case 'After':
           state.currentAbyss.stockAfter = data;
